@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>model documentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$']]
+      }
+    };
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="model-validation-report">Model Validation Report</h1>
+<p>Guangda Fei
+Columbia MAFN</p>
+<p>May 13, 2025</p>
+<hr>
+<h2 id="contents">Contents</h2>
+<ol>
+<li><a href="#1-executive-summary">Executive Summary</a></li>
+<li><a href="#2-introduction">Introduction</a></li>
+<li><a href="#3-product-description">Product Description</a></li>
+<li><a href="#4-model-description">Model Description</a></li>
+<li><a href="#5-validation-methodology-and-scope">Validation Methodology and Scope</a></li>
+<li><a href="#6-validation-results">Validation Results</a></li>
+<li><a href="#7-conclusions-and-recommendations">Conclusions and Recommendations</a></li>
+<li><a href="#8-bibliography">Bibliography</a></li>
+</ol>
+<hr>
+<h2 id="1-executive-summary">1 Executive Summary</h2>
+<p>Risk‐management code for 5-day VaR and ES on a stock (and eventual stock+option) portfolio was reviewed.  I implement four methods—parametric (5-year window), parametric (EWM), historical and Monte Carlo—and validate:</p>
+<ul>
+<li><strong>Accuracy</strong> against closed-form GBM formulas</li>
+<li><strong>Stability</strong> via flat‐price and backtest exception‐frequency tests</li>
+<li><strong>Consistency</strong> Monte Carlo vs. parametric and across methods on a real portfolio</li>
+</ul>
+<p>All tests passed within their acceptance criteria.  The models reliably capture tail‐risk for equity portfolios; extensions for options require adding volatility‐surface dynamics and Greeks.</p>
+<hr>
+<h2 id="2-introduction">2 Introduction</h2>
+<ul>
+<li><strong>Review scope:</strong> VaR/ES engines <code>parametric5yr</code>, <code>parametric_ewm</code>, <code>historical</code>, <code>montecarlo</code> in <code>/software</code></li>
+<li><strong>Intended usage:</strong> marking and risk‐management of equity and option portfolios in a Python framework</li>
+<li><strong>Business unit:</strong> Model Risk / Quantitative Risk Management</li>
+</ul>
+<hr>
+<h2 id="3-product-description">3 Product Description</h2>
+<p>A standalone risk‐calculation library that:</p>
+<ul>
+<li>Takes time-series of asset prices (stocks, later options) and a portfolio definition</li>
+<li>Computes 5-day VaR and ES at user-specified confidence levels via:
+<ol>
+<li>Parametric GBM (rolling window)</li>
+<li>Parametric GBM (exponential weighting)</li>
+<li>Historical empirical</li>
+<li>Monte Carlo GBM</li>
+</ol>
+</li>
+</ul>
+<p>Graphs and numeric outputs are produced for reporting and backtesting.</p>
+<hr>
+<h2 id="4-model-description">4 Model Description</h2>
+<h3 id="modeling-theory--assumptions">Modeling theory / assumptions</h3>
+<ul>
+<li>
+<p><strong>Parametric VaR (5 yr window)</strong><br>
+Assume the total portfolio value (P_t) follows a Geometric Brownian Motion:<br>
+$$
+dP_t = \mu,P_t,dt + \sigma,P_t,dW_t.
+$$<br>
+Estimate drift $\mu$ and volatility $\sigma$ from the past five years of daily log-returns. Take the 1 % left tail of the resulting 5-day log-normal return distribution as VaR.</p>
+</li>
+<li>
+<p><strong>Parametric VaR (EWM “5 yr equivalent”)</strong><br>
+Same GBM assumption, but compute $\mu$ and $\sigma$ by exponential weighting of all past daily log-returns with decay factor $\lambda$ = 0.9992 (so that the effective memory ≈ 5 years). Define<br>
+$$
+\alpha = 1 - \lambda = 0.0008.
+$$</p>
+</li>
+<li>
+<p><strong>Historical VaR (5 yr window)</strong><br>
+No distributional assumptions. Collect the past five years of realized 5-day P&amp;L, sort the losses, and take the 1 % empirical quantile.</p>
+</li>
+<li>
+<p><strong>Monte Carlo VaR (5 yr window)</strong><br>
+Assume GBM with $\mu,\sigma$ estimated over a 5 year window. Simulate many 5-day paths of $P_t$, compute the loss distribution, and take the 1 % worst-case loss.</p>
+</li>
+<li>
+<p><strong>Expected Shortfall</strong><br>
+For each of the four VaR methods above, compute ES as the average of losses exceeding the VaR threshold (e.g. the worst 1 % tail for 99 % ES).</p>
+</li>
+</ul>
+<h4 id="options">Options:</h4>
+<ul>
+<li>
+<p><strong>Underlying dynamics</strong><br>
+We continue to assume each stock follows GBM under both the real and risk-neutral measures:
+$$
+dS_t = \mu S_t,dt + \sigma S_t,dW_t
+\quad\text{and}\quad
+dS_t = r S_t,dt + \sigma S_t,dW_t^Q.
+$$</p>
+</li>
+<li>
+<p><strong>Volatility surface dynamics</strong><br>
+Options depend on the entire implied‐volatility surface (strike, maturity).  We model its evolution via one of:</p>
+<ol>
+<li><strong>Simple “sticky delta” shocks</strong>: treat ATM vol changes as a time-series, and shift the entire surface by historical Δσ_ATM.</li>
+<li><strong>Stochastic‐volatility model</strong> (e.g. Heston): jointly simulate $S_t$ and instantaneous variance $v_t$ under $Q$.</li>
+<li><strong>SABR or GARCH‐based local‐vol model</strong>: calibrate to current surface and simulate vol‐of‐vol.</li>
+</ol>
+</li>
+<li>
+<p><strong>Portfolio P&amp;L approximation</strong><br>
+For parametric VaR/ES we use a <strong>delta‐vega‐gamma approximation</strong> of small changes:
+$$
+\Delta P \approx \Delta_S,\Delta S + \tfrac12\Gamma_S(\Delta S)^2
++ \text{Vega},\Delta\sigma
+$$
+where $(\Delta S,\Delta\sigma)$ are joint‐normally distributed with parameters estimated from historical windows or EWM.</p>
+</li>
+<li>
+<p><strong>Historical and Monte Carlo</strong></p>
+<ul>
+<li><strong>Historical</strong>: collect five years of <strong>total option P&amp;L</strong> at 5-day horizons, sorting and taking the 1% tail.  Implied vols and underlying returns enter implicitly via realized option price moves.</li>
+<li><strong>Monte Carlo</strong>: simulate underlying paths (and vol paths if using Heston/SABR), reprice each option at $t+5$ with the appropriate pricing model (Black-Scholes or chosen SV model), compute P&amp;L.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="mathematical-description">Mathematical description</h3>
+<ol>
+<li>
+<p><strong>Daily log-returns</strong><br>
+$$
+r_{t} = \ln\bigl(P_{t}/P_{t-1}\bigr).
+$$</p>
+</li>
+<li>
+<p><strong>Parametric VaR</strong></p>
+<ul>
+<li>Estimate<br>
+$$
+\hat\mu = \frac{1}{N}\sum_{i=1}^N r_i,
+\quad
+\hat\sigma = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (r_i-\hat\mu)^2}
+$$<br>
+either by rolling window or EWM.</li>
+<li>The 5-day log-return $R_5\sim N(5\hat\mu,;5\hat\sigma^2)$.</li>
+<li>The 99 % VaR is<br>
+$$
+\mathrm{VaR}_{0.99}
+= -P_t \bigl(e^{q_{0.01}} - 1\bigr),
+\quad
+q_{0.01} = 5\,\hat\mu + z_{0.01}\,\sqrt{5}\,\hat\sigma,
+\quad
+z_{0.01} = \Phi^{-1}(0.01).
+$$<br>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Historical VaR</strong></p>
+<ul>
+<li>Compute actual 5-day P&amp;L: $\Delta P_i = P_{t_i+5} - P_{t_i}$.</li>
+<li>Sort the losses $-\Delta P$ and take its 1 % quantile.</li>
+</ul>
+</li>
+<li>
+<p><strong>Monte Carlo VaR</strong></p>
+<ul>
+<li>Draw $M$ samples $R_5^{(j)}\sim N(5\hat\mu,5\hat\sigma^2)$.</li>
+<li>Simulate $P_t^{(j)} = P_t,e^{R_5^{(j)}}$.</li>
+<li>Losses $\ell^{(j)} = P_t - P_t^{(j)}$.</li>
+<li>VaR = 1 % quantile of ${\ell^{(j)}}$.</li>
+</ul>
+</li>
+<li>
+<p><strong>Expected Shortfall</strong></p>
+<ul>
+<li>Compute the mean of the worst 1 % of losses for 99 % ES (or worst 2.5 % for 97.5 % ES).</li>
+</ul>
+</li>
+</ol>
+<h4 id="options">Options:</h4>
+<ol>
+<li>
+<p><strong>Greeks</strong></p>
+<ul>
+<li>$\Delta = \partial P/\partial S,;\Gamma = \partial^2P/\partial S^2,;\text{Vega} = \partial P/\partial\sigma.$</li>
+<li>Compute via closed‐form formulas (Black-Scholes) or finite‐difference on numerically‐calibrated surfaces.</li>
+</ul>
+</li>
+<li>
+<p><strong>Joint distribution</strong></p>
+<ul>
+<li>Estimate daily covariance matrix of $(\Delta S/S,,\Delta\sigma)$ over your chosen window.</li>
+<li>Scale to 5-day horizon:<br>
+$$
+\mathrm{Cov}\!\bigl(\tfrac{\Delta S}{S},\,\Delta\sigma\bigr)_{5\text{-day}}
+= 5 \times
+\mathrm{Cov}\!\bigl(\tfrac{\Delta S}{S},\,\Delta\sigma\bigr)_{\mathrm{daily}}.
+$$<br>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Parametric VaR</strong></p>
+<ul>
+<li>For each date $t$, approximate the 5-day P&amp;L distribution as normal with mean $\mu_P$ and variance $\sigma_P^2$ given by the Greek‐weighted covariance:
+$$
+\mu_P = \Delta,\mu_S + \text{Vega},\mu_\sigma + \tfrac12,\Gamma,\sigma_S^2,
+$$
+$$
+\sigma_P^2
+= \Delta^2,\sigma_S^2
+;+;\text{Vega}^2,\sigma_\sigma^2
+;+;2,\Delta,\text{Vega},\mathrm{Cov}\bigl(\Delta S,\Delta\sigma\bigr)
+;+;\tfrac{1}{4},\Gamma^2,\mathrm{Var}\bigl((\Delta S)^2\bigr).
+$$</li>
+<li>$VaR_{0.99}$ is given by the 1% quantile of the normal distribution:
+$$
+\mathrm{VaR}_{0.99}
+= \mu_P ;+;\sigma_P,\Phi^{-1}(0.01),
+$$
+where $\Phi^{-1}$ is the inverse CDF of the standard normal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Historical VaR / ES</strong></p>
+<ul>
+<li>Build the series of 5-day option P&amp;L directly (price$_{t+5}$ − price$_t$) and take empirical quantiles or tail‐averages.</li>
+</ul>
+</li>
+<li>
+<p><strong>Monte Carlo VaR / ES</strong></p>
+<ul>
+<li>Simulate scenarios $(S_{t+5},\sigma_{t+5})$, reprice options via $P(S_{t+5},\sigma_{t+5})$, compute P&amp;L, and extract the 1% and ES statistics.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="model-implementation--numerical-methods">Model implementation &amp; numerical methods</h3>
+<ul>
+<li>
+<p><strong>Parameter estimation</strong></p>
+<ul>
+<li>Rolling: sample mean &amp; std over $N$ days.</li>
+<li>EWM: use <code>.ewm(alpha=alpha, adjust=False)</code> for weighted mean &amp; var.</li>
+</ul>
+</li>
+<li>
+<p><strong>VaR calculation</strong></p>
+<ul>
+<li>Parametric: closed-form log-normal quantile.</li>
+<li>Historical: sort &amp; index empirical distribution.</li>
+<li>Monte Carlo: vectorized simulation via <code>numpy.random.normal</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Backtesting</strong></p>
+<ul>
+<li>Compare realized 5-day P&amp;L to previous-day VaR and count exceptions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Greek calculation</strong></p>
+<ul>
+<li>Use Black-Scholes formulas for $\Delta,\Gamma,\text{Vega}$ with current implied vol.</li>
+<li>If using a full SV model, compute via adjoint or finite‐difference.</li>
+</ul>
+</li>
+<li>
+<p><strong>Volatility estimation</strong></p>
+<ul>
+<li>
+<p>For parametric VaR: estimate daily $\mu_\sigma$, $\sigma_\sigma$, and $\mathrm{Cov}(\Delta S, \Delta\sigma)$ via rolling or EWM.</p>
+</li>
+<li>
+<p>For Monte Carlo: calibrate SV parameters (e.g. Heston $\kappa,\theta,\xi,\rho$) to the implied surface.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Option repricing</strong></p>
+<ul>
+<li>Historical: simply read back historical option prices from the data source.</li>
+<li>Monte Carlo: vectorized pricing routines for large scenario sets (NumPy, Numba, or C extensions).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="calibration-methodology">Calibration methodology</h3>
+<ul>
+<li>
+<p><strong>Window lengths</strong></p>
+<ul>
+<li>5 years ≈ 1 260 trading days.</li>
+</ul>
+</li>
+<li>
+<p><strong>Decay factor</strong><br>
+$$
+\lambda = 0.9992,\quad
+\alpha = 1 - \lambda = 0.0002.
+$$</p>
+</li>
+<li>
+<p><strong>Monte Carlo sample size</strong></p>
+<ul>
+<li>$M = 10{,}000$ paths to stabilize tail estimates.</li>
+</ul>
+</li>
+</ul>
+<h4 id="options">Options:</h4>
+<ul>
+<li><strong>Window lengths</strong>
+<ul>
+<li>Use the same 5-year windows for underlying and vol estimates.</li>
+</ul>
+</li>
+<li><strong>SV calibration</strong>
+<ul>
+<li>Fit model to current surface daily, update parameters with EWM.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="model-usage">Model usage</h3>
+<ul>
+<li>
+<p>The top‐level <strong>main.py</strong> acts as a launcher, prompting the user to choose between:</p>
+<ol>
+<li><strong>historical_calibration.py</strong> — loads CSV, calibrates μ/σ over historical window, then runs all VaR/ES methods</li>
+<li><strong>input_mu_sigma.py</strong>      — prompts user for manual μ/σ, then runs parametric VaR &amp; ES only</li>
+</ol>
+</li>
+<li>
+<p>There are <strong>four VaR engines</strong>:</p>
+<ul>
+<li><code>parametric5yr</code> (rolling‐window GBM)</li>
+<li><code>parametric_ewm</code> (exponentially weighted GBM, VaR only)</li>
+<li><code>historical</code> (empirical P&amp;L)</li>
+<li><code>montecarlo</code> (GBM Monte Carlo)</li>
+</ul>
+</li>
+<li>
+<p>There are <strong>three ES engines</strong> (all except <code>parametric_ewm</code>).</p>
+</li>
+</ul>
+<hr>
+<h3 id="model-exposure">Model exposure</h3>
+<ul>
+<li>Captures market risk of the portfolio $P$.</li>
+<li>Supports both long- and short-position loss profiles.</li>
+<li>Future extensions: multi-asset portfolios, time-varying correlation, jumps.</li>
+</ul>
+<hr>
+<h2 id="5-validation-methodology-and-scope">5 Validation Methodology and Scope</h2>
+<ul>
+<li>(details in test plan)</li>
+</ul>
+<p>We exercised a five-point test plan:</p>
+<ol>
+<li><strong>Flat-Price Unit Test</strong>
+<ul>
+<li>Constant prices → zero VaR/ES for all methods (ES skipped for EWM).</li>
+</ul>
+</li>
+<li><strong>Parametric Closed-Form Consistency</strong>
+<ul>
+<li>Deterministic GBM (σ=0) → exact match to analytic VaR/ES.</li>
+</ul>
+</li>
+<li><strong>Backtest Exception Frequency</strong>
+<ul>
+<li>10-yr GBM path → realized 5-day exception frequency within ±0.005 of nominal 1%.</li>
+</ul>
+</li>
+<li><strong>Monte Carlo vs. Parametric Agreement</strong>
+<ul>
+<li>σ=0 path → parametric and MC VaR series are identical.</li>
+</ul>
+</li>
+<li><strong>Portfolio Consistency Visualization</strong>
+<ul>
+<li>Real multi-stock portfolio → overlaid VaR and ES time series showed no method drifting by more than ±20% relative to the group median.</li>
+</ul>
+</li>
+</ol>
+<p>First 4 tests were automated with <code>pytest</code> and simple plotting scripts, covering both unit‐level and end-to-end validation.</p>
+<hr>
+<h2 id="6-validation-results">6 Validation Results</h2>
+<ul>
+<li>details in test result</li>
+<li>all tests passed</li>
+</ul>
+<hr>
+<h2 id="7-conclusions-and-recommendations">7 Conclusions and Recommendations</h2>
+<p>The four VaR/ES engines:</p>
+<ul>
+<li><strong>Pass all unit and end-to-end tests</strong>, demonstrating correct implementation of GBM assumptions.</li>
+<li><strong>Agree closely</strong> on real-data portfolio risk metrics, ensuring robustness.</li>
+</ul>
+<p><strong>Limitations &amp; next steps:</strong></p>
+<ul>
+<li>Current scope: <strong>stocks only</strong>.  Options require adding volatility‐surface dynamics.</li>
+<li>Recommendation: implement Greeks-based parametric and full SV Monte Carlo for options, then re-run the validation suite with option P&amp;L data.</li>
+<li>Investigate <strong>non-GBM features</strong> (jumps, fat tails) if backtests on extreme events show undercoverage.</li>
+</ul>
+<hr>
+<h2 id="8-bibliography">8 Bibliography</h2>
+<ul>
+<li>[1] Stein, H. J. “Model Validation Report Template.” Strategic Risk Research Group, November 18 2015.</li>
+</ul>
+
+</body>
+</html>

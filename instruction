@@ -1,0 +1,98 @@
+Here is the instruction on how to use the program, two samples are provided below. 
+
+un software/main.py
+result graphs stored in output folder
+
+testing: run pytest software/test -q
+
+Other deliveries are in the root directory in PDF format. 
+
+Sample 1: 
+
+Choose input mode:
+  1) Historical calibration from CSV prices (includes historical VaR and ES)
+  2) Manual parameter input (no historical data needed)
+Enter 1 or 2: 1
+Enter the relative path to CSV file (dates as index, security codes as columns)
+ [e.g. software/data/portfolio.csv]: software/data/portfolio.csv
+Enter VaR confidence level (decimal between 0 and 1) [e.g. 0.99]: 0.99
+Enter ES confidence level (decimal between 0 and 1) [e.g. 0.99]: 0.99
+Enter number of stock positions: 2
+  Code for stock #1: AAPL
+  Shares for AAPL: 1
+  Code for stock #2: AMZN
+  Shares for AMZN: 1
+
+Stock Portfolio VaR and ES:
+Method                       VaR          ES
+Parametric 5yr             41.59       47.52
+Parametric EWM             37.65       -1.41
+Historical                 46.24       55.61
+Monte Carlo                41.76       49.77
+
+
+Sample 2:
+Choose input mode:
+  1) Historical calibration from CSV prices (includes historical VaR and ES)
+  2) Manual parameter input (no historical data needed)
+Enter 1 or 2: 2
+Number of stocks: 2
+Stock #1 code: MSFT
+  Position (# shares): ^CTraceback (most recent call last):
+  File "/Users/guangdafei/PythonProjects/risk_final_project/software/main.py", line 22, in <module>
+    main()
+  File "/Users/guangdafei/PythonProjects/risk_final_project/software/main.py", line 16, in main
+    input_mu_sigma.main()
+  File "/Users/guangdafei/PythonProjects/risk_final_project/software/input_mu_sigma.py", line 134, in main
+    pos     = float(input(f"  Position (# shares): "))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+(default3.12) (base) guangdafei@GuangdatekiMacBook-Pro risk_final_project % /opt/anaconda3/envs/default3.12/bin/python /Users/guangdafei/PythonProjects/risk_final_project/software/main.py
+Choose input mode:
+  1) Historical calibration from CSV prices (includes historical VaR and ES)
+  2) Manual parameter input (no historical data needed)
+Enter 1 or 2: 2
+Number of stocks: 2
+Stock #1 code: TSLA
+  Position (# shares): 100
+  Current price of TSLA: 334
+  Drift (mu): 0.1
+  Volatility (sigma): 0.4
+Stock #2 code: MSFT
+  Position (# shares): 100
+  Current price of MSFT: 449
+  Drift (mu): 0.05
+  Volatility (sigma): 0.3
+Number of options: 2
+Option #1 underlying code: AMZN
+  Position (# contracts): 100
+  Current price of AMZN: 232
+  Strike: 230
+  Time to maturity (yrs): 0.5
+  Drift (mu): 0.04
+  Volatility (sigma): 0.3
+  Risk-free rate (r) [0.05]: 0.05
+  Dividend yield (q) [0.0]: 0
+  Option type (call/put) [call]: call
+Option #2 underlying code: AAPL
+  Position (# contracts): 100
+  Current price of AAPL: 240
+  Strike: 230
+  Time to maturity (yrs): 1
+  Drift (mu): 0.04
+  Volatility (sigma): 0.3
+  Risk-free rate (r) [0.05]: 0.05
+  Dividend yield (q) [0.0]: 0
+  Option type (call/put) [call]: call
+VaR confidence (e.g. 0.99): 0.99
+ES confidence (e.g. 0.975): 0.975
+MC sims (e.g. 10000): 10000
+
+=== Stock Parametric VaR/ES ===
+TSLA:  Parametric VaR=28791.94, ES=28651.06 | MC VaR=29119.62, ES=28465.64
+MSFT:  Parametric VaR=35231.47, ES=35077.35 | MC VaR=35220.39, ES=34917.46
+
+=== Option Parametric VaR/ES ===
+AMZN:  Parametric VaR=11149.75, ES=11103.97 | MC VaR=2335.32, ES=2335.32
+AAPL:  Parametric VaR=12914.44, ES=12861.41 | MC VaR=3924.10, ES=3924.10
